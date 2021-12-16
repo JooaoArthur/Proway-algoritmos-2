@@ -1,0 +1,18 @@
+-- criar uma tabela chamada usuarios com os campos
+-- id interger primary key autoincrement unique
+-- nome text not nuLL
+-- email text not nuLL
+-- obs text 
+
+-- para criar uma tabela utilize CREATE TABLE + nome da tabela 
+-- dentro dos () informar campo a campo com seus atributos 
+-- separar os campos com VIRGULA
+-- cada campo tem seu nome TIPO e configurações adicionais
+
+create table usuarios(
+id integer primary key autoincrement unique,
+nome text not null,
+email text not null,
+senha text not null,
+obs text
+)
