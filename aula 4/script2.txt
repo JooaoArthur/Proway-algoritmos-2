@@ -1,0 +1,92 @@
+
+
+select * from usuarios;
+
+insert into usuarios (nome,email,senha) values ("Rubem Oliota","ruben@gmail.com","yh hyuu");
+insert into usuarios (nome,email,senha) values ("Eliane Oliota","eliane@gmail.com","yh hyuu");
+insert into usuarios (nome,email,senha) values ("Vezu Oliota","ruben@gmail.com","yh hyuu");
+insert into usuarios (nome,email,senha) values ("Duquesa Oliota","ruben@gmail.com","yh hyuu");
+
+select * from telefones;
+
+insert into telefones (tipo,numero_completo,usuario_id)
+values ("residencial","(47) 997578522","6");
+
+
+select *
+from usuarios
+inner join telefones on telefones.usuario_id = usuarios.id;
+--inner é um tipo de relacionamento restrito onde os valores comparados
+--devem existir em ambas tabelas (se não houver não exibe essa linha)
+
+-- o left join é um tipo de relacionamento menos restritivo
+-- onde basta existir dados na tabela principal dessa forma os dados da tabela secundaria 
+-- ficarão nulos (mas os resultados são exibidos em linha)
+
+select 
+    usu.nome as usuario,
+    usu.email as "e-mail",
+    usu.senha as password,
+    tel.tipo as type,
+    tel.numero_completo as number
+from usuarios as usu
+     inner join telefones as tel on tel.usuario_id = usu.id;
+     
+--criar 2 tabelas, primeira tabela SERIES com os campos 
+-- ID ...
+-- nome ...
+-- ano ...
+-- diretor ...
+-- genero ...
+
+--segunda tabela de EPISODIOS
+-- ID...
+-- titulo obrigatorio    
+-- sequencia obrigatorio
+-- descrição
+-- serie_id
+
+select * from series;
+
+insert into series (nome,ano,genero,diretor)values("Vikings","2019","ação","Michael Hirst");
+insert into series (nome,ano,diretor)values("La casa de papel","2019","professor");
+insert into series (nome,ano,genero)values("The Witcher","2020","fantasia");
+insert into series (nome,ano,genero)values("One Piece","1997","anime");
+insert into series (nome,ano,genero)values("Bleach","2006","anime");
+insert into series (nome,ano,genero)values("Naruto","2002","anime");
+insert into series (nome,ano,genero)values("The Boys","2020","ação");
+
+select count(*) from series
+where
+ano = 2019;
+
+select genero,count(*) from series
+group by genero
+;
+
+update series 
+set
+genero = "ação"
+where
+id = 7
+
+--id 6 em series é la casa de papel
+
+select * from episodios;
+
+select * from series as se
+inner join episodios as ep on ep.serie_id = se.id
+where se.id=2
+order by ep.sequencia asc
+
+select * from series as se
+left join episodios as ep on ep.serie_id = se.id
+order by se.nome asc,ep.sequencia desc
+;
+
+select 
+se.nome,
+count (*)
+from series as se
+inner join episodios as ep on ep.serie_id = se.id
+group by se.nome
